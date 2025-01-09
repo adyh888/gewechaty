@@ -79,5 +79,5 @@ export class GeweBot {
   deviceList(){ // 获取设备列表
     return getDevices()
   }
- 
+
 }

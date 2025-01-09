@@ -166,10 +166,10 @@ class myDB {
     if (contact.userName === null) {
       return;
     }
-  
+
     // 定义字段的最大长度
     const MAX_LENGTH = 255;
-  
+
     // 用一个函数来截断字符串
     const truncate = (value, maxLength = MAX_LENGTH) => {
       if (typeof value === 'string' && value.length > maxLength) {
@@ -177,7 +177,7 @@ class myDB {
       }
       return value;
     };
-  
+
     const insertStmt = this.db.prepare(`
       INSERT OR REPLACE INTO contact (
         userName, nickName, pyInitial, quanPin, sex, remark, remarkPyInitial,
@@ -185,7 +185,7 @@ class myDB {
         smallHeadImgUrl, description, cardImgUrl, labelList, province, city, phoneNumList
       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
-  
+
     insertStmt.run(
       truncate(contact.userName) || null,
       truncate(contact.nickName) || null,
@@ -208,7 +208,7 @@ class myDB {
       truncate(contact.city) || null,
       truncate(contact.phoneNumList) || null
     );
-  
+
     console.log(`缓存联系人: ${contact.userName}`);
   }
 
@@ -297,7 +297,7 @@ class myDB {
         remarkQuanPin = ?, chatRoomNotify = ?, chatRoomOwner = ?, smallHeadImgUrl = ?, memberList = ?
       WHERE chatroomId = ?
     `);
-    
+
     const res = await getRoomMemberList(chatroomId) // 更新memberlist
     if(res && res.memberList){
       newData.memberList = res.memberList
